@@ -2,7 +2,7 @@
 
 title: "Trend Analysis for Crime in Los Angeles, California"
 author: "Steven Nichols"
-date: "Decemver 14th, 2016"
+date: "December 14th, 2016"
 output:
   html_document:
     highlight: tango
@@ -122,9 +122,16 @@ crime_groups_cat$Category <- as.factor(crime_groups_cat$Category)
 
 ## group dataset by area name and crime category, then tally crime incidences
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, include=FALSE}
 
 library(dplyr)
+
+
+```
+
+```{r, warning=FALSE}
+
+
 
 crime_groups <- crime_groups_cat %>% group_by(Month_Year, Area_Name, Category) %>% tally()
 
@@ -211,7 +218,7 @@ for (i in 1:nrow(crime_groups)) {
 
 ```
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, include=FALSE}
 library(reshape2)
 library(devtools)
 library(vars)
@@ -238,7 +245,7 @@ crime_groups_melt.ts <- ts(crime_groups_melt, frequency=12, start=c(2014))
 
 ```
 
-```{r, warning=FALSE}
+```{r, message=FALSE, warning=FALSE}
 
 library(ggfortify)
 
@@ -381,7 +388,7 @@ crime_percent_change_2016$Fastest[i] <- names(which.max( crime_percent_change_20
 }
 
 ##create df for most-common crimes in 2016
-head(crime_groups_cat)
+
 crime_totals <- crime_groups
 crime_totals$Month_Year <- as.yearmon(crime_totals$Month_Year, "%b %Y")
 crime_totals['Year'] <- crime_totals$Month_Year
@@ -393,7 +400,7 @@ crime_totals <- crime_totals %>% group_by(Year, Area_Name, Category) %>% tally()
 
 ```
 
-```{r, warning=FALSE}
+```{r, message=FALSE, warning=FALSE}
 library(reshape2)
 library(devtools)
 library(vars)
