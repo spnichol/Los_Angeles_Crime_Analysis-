@@ -1,6 +1,6 @@
 # Trend Analysis for Crime in Los Angeles, California
 Steven Nichols  
-Decemver 14th, 2016  
+December 14th, 2016  
 
 
 
@@ -101,26 +101,7 @@ crime_groups_cat$Category <- as.factor(crime_groups_cat$Category)
 ## group dataset by area name and crime category, then tally crime incidences
 
 
-```r
-library(dplyr)
-```
 
-```
-## 
-## Attaching package: 'dplyr'
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
 
 ```r
 crime_groups <- crime_groups_cat %>% group_by(Month_Year, Area_Name, Category) %>% tally()
@@ -205,57 +186,6 @@ for (i in 1:nrow(crime_groups)) {
 ```
 
 
-```r
-library(reshape2)
-library(devtools)
-library(vars)
-```
-
-```
-## Loading required package: MASS
-```
-
-```
-## 
-## Attaching package: 'MASS'
-```
-
-```
-## The following object is masked from 'package:dplyr':
-## 
-##     select
-```
-
-```
-## Loading required package: strucchange
-```
-
-```
-## Loading required package: zoo
-```
-
-```
-## 
-## Attaching package: 'zoo'
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     as.Date, as.Date.numeric
-```
-
-```
-## Loading required package: sandwich
-```
-
-```
-## Loading required package: urca
-```
-
-```
-## Loading required package: lmtest
-```
 
 
 ##Look for further gaps in data and get look at overall crime trends in Los Angeles
@@ -288,12 +218,8 @@ crime_groups_melt.ts <- ts(crime_groups_melt, frequency=12, start=c(2014))
 library(ggfortify)
 ```
 
-```
-## Loading required package: ggplot2
-```
-
 ##Plot multivariate time series to see missing data and get look at general trends in city 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 
 ```r
@@ -427,27 +353,7 @@ crime_percent_change_2016$Fastest[i] <- names(which.max( crime_percent_change_20
 }
 
 ##create df for most-common crimes in 2016
-head(crime_groups_cat)
-```
 
-```
-##    X Date_Standard Month_Year Area_Name
-## 1  1    12/31/2014   Dec 2014   Central
-## 2  2    12/31/2014   Dec 2014   Central
-## 3  3    12/31/2014   Dec 2014   Central
-## 4  4    12/31/2014   Dec 2014   Central
-## 5 10    12/31/2014   Dec 2014   Central
-## 6 11    12/31/2014   Dec 2014   Central
-##                                                Crm_Cd_Desc Category
-## 1                                                  ROBBERY  Robbery
-## 2           ASSAULT WITH DEADLY WEAPON, AGGRAVATED ASSAULT  Assault
-## 3                                                  ROBBERY  Robbery
-## 4                         DOCUMENT FORGERY / STOLEN FELONY    Theft
-## 5                                            THEFT, PERSON    Theft
-## 6 THEFT-GRAND ($950.01 & OVER)EXCPT,GUNS,FOWL,LIVESTK,PROD    Theft
-```
-
-```r
 crime_totals <- crime_groups
 crime_totals$Month_Year <- as.yearmon(crime_totals$Month_Year, "%b %Y")
 crime_totals['Year'] <- crime_totals$Month_Year
@@ -525,11 +431,11 @@ names(crime_stats_2016) <- col_list
 
 ##Arson_77th
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-19-1.png)<!-- -->
 
 ##Arson_Central
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-19-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-20-1.png)<!-- -->
 
 
 
@@ -537,7 +443,7 @@ names(crime_stats_2016) <- col_list
 
 ##Robbery_Devonshire
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-20-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-21-1.png)<!-- -->
 
 
 
@@ -548,86 +454,86 @@ names(crime_stats_2016) <- col_list
 
 ##Arson_Foothill
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-21-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-22-1.png)<!-- -->
 
 
 
 
 ##Arson_Harbor
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-22-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-23-1.png)<!-- -->
 
 
 
 ##Assault_Hollenbeck
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-23-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-24-1.png)<!-- -->
 
 
 ##Arson_Hollywood
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-24-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-25-1.png)<!-- -->
 
 
 
 
 ##Arson_Mission
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-25-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-26-1.png)<!-- -->
 
 ##Robbery_N_Hollywood
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-26-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-27-1.png)<!-- -->
 
 
 ##Arson_Newton
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-27-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-28-1.png)<!-- -->
 
 ##Arson_Northeast
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-28-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-29-1.png)<!-- -->
 
 ##Arson_Olympic
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-29-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-30-1.png)<!-- -->
 
 ##Assault_Pacific
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-30-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-31-1.png)<!-- -->
 
 
 ##Arson_Rampart
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-31-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-32-1.png)<!-- -->
 
 
 
 
 ##Arson_Southeast
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-32-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-33-1.png)<!-- -->
 
 
 
 ##Arson_Southwest
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-33-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-34-1.png)<!-- -->
 
 
 ##Arson_Topanga
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-34-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-35-1.png)<!-- -->
 
 
 ##Arson_Van_Nuys
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-35-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-36-1.png)<!-- -->
 
 
 ##Assault_West_LA
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-36-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-37-1.png)<!-- -->
 
 
 
@@ -635,11 +541,11 @@ names(crime_stats_2016) <- col_list
 
 ##Arson_West_Valley
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-37-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-38-1.png)<!-- -->
 
 ##Arson_Wilshire
 
-![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-38-1.png)<!-- -->
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-39-1.png)<!-- -->
 
 
 

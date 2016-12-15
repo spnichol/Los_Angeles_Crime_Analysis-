@@ -186,7 +186,7 @@ $(document).ready(function () {
 </div>
 
 <hr />
-<p>title: “Trend Analysis for Crime in Los Angeles, California” author: “Steven Nichols” date: “Decemver 14th, 2016” output: html_document: highlight: tango keep_md: yes number_sections: yes theme: cerulean toc: yes pdf_document: toc: yes word_document: toc: yes —</p>
+<p>title: “Trend Analysis for Crime in Los Angeles, California” author: “Steven Nichols” date: “December 14th, 2016” output: html_document: highlight: tango keep_md: yes number_sections: yes theme: cerulean toc: yes pdf_document: toc: yes word_document: toc: yes —</p>
 <div id="load-original-file" class="section level2">
 <h2><span class="header-section-number">0.1</span> load original file</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">Steven</span><span class="ch">\\</span><span class="st">Google Drive</span><span class="ch">\\</span><span class="st">1. MOT</span><span class="ch">\\</span><span class="st">1) Fall 2016</span><span class="ch">\\</span><span class="st">1. BA</span><span class="ch">\\</span><span class="st">Assignments</span><span class="ch">\\</span><span class="st">Midterm</span><span class="ch">\\</span><span class="st">BA_Assignment</span><span class="ch">\\</span><span class="st">Final</span><span class="ch">\\</span><span class="st">LAPD_Crime_Analysis&quot;</span>)
@@ -272,15 +272,6 @@ crime_groups_cat$Category &lt;-<span class="st"> </span><span class="kw">as.fact
 </div>
 <div id="group-dataset-by-area-name-and-crime-category-then-tally-crime-incidences" class="section level2">
 <h2><span class="header-section-number">0.5</span> group dataset by area name and crime category, then tally crime incidences</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
-<pre><code>## 
-## Attaching package: 'dplyr'</code></pre>
-<pre><code>## The following objects are masked from 'package:stats':
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">crime_groups &lt;-<span class="st"> </span>crime_groups_cat %&gt;%<span class="st"> </span><span class="kw">group_by</span>(Month_Year, Area_Name, Category) %&gt;%<span class="st"> </span><span class="kw">tally</span>()</code></pre></div>
 </div>
 <div id="calculate-z-scores-to-determine-outliers" class="section level2">
@@ -357,25 +348,6 @@ for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(crime_groups)) 
    <span class="ot">TRUE</span> ==<span class="st"> </span><span class="ot">TRUE</span> 
   }
 }</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape2)
-<span class="kw">library</span>(devtools)
-<span class="kw">library</span>(vars)</code></pre></div>
-<pre><code>## Loading required package: MASS</code></pre>
-<pre><code>## 
-## Attaching package: 'MASS'</code></pre>
-<pre><code>## The following object is masked from 'package:dplyr':
-## 
-##     select</code></pre>
-<pre><code>## Loading required package: strucchange</code></pre>
-<pre><code>## Loading required package: zoo</code></pre>
-<pre><code>## 
-## Attaching package: 'zoo'</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     as.Date, as.Date.numeric</code></pre>
-<pre><code>## Loading required package: sandwich</code></pre>
-<pre><code>## Loading required package: urca</code></pre>
-<pre><code>## Loading required package: lmtest</code></pre>
 </div>
 <div id="look-for-further-gaps-in-data-and-get-look-at-overall-crime-trends-in-los-angeles" class="section level2">
 <h2><span class="header-section-number">0.7</span> Look for further gaps in data and get look at overall crime trends in Los Angeles</h2>
@@ -392,7 +364,6 @@ crime_groups_melt &lt;-<span class="st"> </span><span class="kw">as.data.frame</
 ##create multivariate time series 
 crime_groups_melt.ts &lt;-<span class="st"> </span><span class="kw">ts</span>(crime_groups_melt, <span class="dt">frequency=</span><span class="dv">12</span>, <span class="dt">start=</span><span class="kw">c</span>(<span class="dv">2014</span>))</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggfortify)</code></pre></div>
-<pre><code>## Loading required package: ggplot2</code></pre>
 </div>
 <div id="plot-multivariate-time-series-to-see-missing-data-and-get-look-at-general-trends-in-city" class="section level2">
 <h2><span class="header-section-number">0.8</span> Plot multivariate time series to see missing data and get look at general trends in city</h2>
@@ -508,22 +479,8 @@ crime_percent_change_2016$Fastest[i] &lt;-<span class="st"> </span><span class="
 }
 
 ##create df for most-common crimes in 2016
-<span class="kw">head</span>(crime_groups_cat)</code></pre></div>
-<pre><code>##    X Date_Standard Month_Year Area_Name
-## 1  1    12/31/2014   Dec 2014   Central
-## 2  2    12/31/2014   Dec 2014   Central
-## 3  3    12/31/2014   Dec 2014   Central
-## 4  4    12/31/2014   Dec 2014   Central
-## 5 10    12/31/2014   Dec 2014   Central
-## 6 11    12/31/2014   Dec 2014   Central
-##                                                Crm_Cd_Desc Category
-## 1                                                  ROBBERY  Robbery
-## 2           ASSAULT WITH DEADLY WEAPON, AGGRAVATED ASSAULT  Assault
-## 3                                                  ROBBERY  Robbery
-## 4                         DOCUMENT FORGERY / STOLEN FELONY    Theft
-## 5                                            THEFT, PERSON    Theft
-## 6 THEFT-GRAND ($950.01 &amp; OVER)EXCPT,GUNS,FOWL,LIVESTK,PROD    Theft</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">crime_totals &lt;-<span class="st"> </span>crime_groups
+
+crime_totals &lt;-<span class="st"> </span>crime_groups
 crime_totals$Month_Year &lt;-<span class="st"> </span><span class="kw">as.yearmon</span>(crime_totals$Month_Year, <span class="st">&quot;%b %Y&quot;</span>)
 crime_totals[<span class="st">'Year'</span>] &lt;-<span class="st"> </span>crime_totals$Month_Year
 crime_totals$Year &lt;-<span class="st"> </span><span class="kw">format</span>(crime_totals$Month_Year, <span class="st">&quot;%Y&quot;</span>)
