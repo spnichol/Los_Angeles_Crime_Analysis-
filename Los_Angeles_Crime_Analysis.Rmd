@@ -441,6 +441,8 @@ col_list <- c("Area_Name", "Year", "Fastest", "Most_Common", "Arson/Vandalism", 
 
 names(crime_stats_2016) <- col_list
 
+write.csv(crime_stats_2016, "crime_stats.csv")
+
 ```
 
 ##create ts and decompose for target area/crime combos 

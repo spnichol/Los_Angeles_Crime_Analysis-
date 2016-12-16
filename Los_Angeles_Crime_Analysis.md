@@ -442,6 +442,8 @@ crime_stats_2016 <- subset(crime_stats_2016, select=c("Area_Name", "Year.x", "Fa
 col_list <- c("Area_Name", "Year", "Fastest", "Most_Common", "Arson/Vandalism", "%Change_Arson/Vandalism", "Assault", "%Change_Assault", "Child_Abuse", "Homicide", "Other", "Robbery", "%Change_Robbery", "Sexual", "Theft", "%Change_Theft")
 
 names(crime_stats_2016) <- col_list
+
+write.csv(crime_stats_2016, "crime_stats.csv")
 ```
 
 ##create ts and decompose for target area/crime combos 

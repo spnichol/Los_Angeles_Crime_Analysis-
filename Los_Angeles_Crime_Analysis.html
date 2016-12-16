@@ -545,7 +545,9 @@ crime_stats_2016 &lt;-<span class="st"> </span><span class="kw">subset</span>(cr
 
 col_list &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Area_Name&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;Fastest&quot;</span>, <span class="st">&quot;Most_Common&quot;</span>, <span class="st">&quot;Arson/Vandalism&quot;</span>, <span class="st">&quot;%Change_Arson/Vandalism&quot;</span>, <span class="st">&quot;Assault&quot;</span>, <span class="st">&quot;%Change_Assault&quot;</span>, <span class="st">&quot;Child_Abuse&quot;</span>, <span class="st">&quot;Homicide&quot;</span>, <span class="st">&quot;Other&quot;</span>, <span class="st">&quot;Robbery&quot;</span>, <span class="st">&quot;%Change_Robbery&quot;</span>, <span class="st">&quot;Sexual&quot;</span>, <span class="st">&quot;Theft&quot;</span>, <span class="st">&quot;%Change_Theft&quot;</span>)
 
-<span class="kw">names</span>(crime_stats_2016) &lt;-<span class="st"> </span>col_list</code></pre></div>
+<span class="kw">names</span>(crime_stats_2016) &lt;-<span class="st"> </span>col_list
+
+<span class="kw">write.csv</span>(crime_stats_2016, <span class="st">&quot;crime_stats.csv&quot;</span>)</code></pre></div>
 </div>
 <div id="create-ts-and-decompose-for-target-areacrime-combos" class="section level2">
 <h2><span class="header-section-number">0.13</span> create ts and decompose for target area/crime combos</h2>
