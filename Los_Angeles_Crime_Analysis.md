@@ -167,7 +167,25 @@ for (i in 2:nrow(crime_groups)) {
 }
 
 ## calculate z-score outside of loop 
+head(crime_groups)
+```
 
+```
+## Source: local data frame [6 x 9]
+## Groups: Month_Year, Area_Name [6]
+## 
+##   Month_Year   Area_Name        Category     n running     mean       sd
+##       <fctr>      <fctr>          <fctr> <int>   <dbl>    <dbl>    <dbl>
+## 1   Apr 2014 77th Street Arson/Vandalism    49      49 59.35484 15.93016
+## 2   Apr 2015 77th Street Arson/Vandalism    61     110 59.35484 15.93016
+## 3   Apr 2016 77th Street Arson/Vandalism    64     174 59.35484 15.93016
+## 4   Aug 2014 77th Street Arson/Vandalism    57     231 59.35484 15.93016
+## 5   Aug 2015 77th Street Arson/Vandalism    62     293 59.35484 15.93016
+## 6   Dec 2014 77th Street Arson/Vandalism    56     349 59.35484 15.93016
+## # ... with 2 more variables: zscore <dbl>, row_num <dbl>
+```
+
+```r
 crime_groups$zscore <- (crime_groups$n - crime_groups$mean) / crime_groups$sd
 count <- 0 
 

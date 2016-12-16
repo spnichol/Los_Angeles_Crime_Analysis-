@@ -198,7 +198,7 @@ for (i in 2:nrow(crime_groups)) {
 }
 
 ## calculate z-score outside of loop 
-
+head(crime_groups)
 crime_groups$zscore <- (crime_groups$n - crime_groups$mean) / crime_groups$sd
 count <- 0 
 
