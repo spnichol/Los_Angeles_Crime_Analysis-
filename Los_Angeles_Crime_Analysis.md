@@ -567,5 +567,183 @@ write.csv(crime_stats_2016, "crime_stats.csv")
 
 ![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-39-1.png)<!-- -->
 
+## forecast crime 
 
 
+```r
+require(tseries)
+```
+
+```
+## Loading required package: tseries
+```
+
+```r
+adf.test(diff(diff(log(Arson_Newton.ts))))
+```
+
+```
+## 
+## 	Augmented Dickey-Fuller Test
+## 
+## data:  diff(diff(log(Arson_Newton.ts)))
+## Dickey-Fuller = -3.5993, Lag order = 3, p-value = 0.04888
+## alternative hypothesis: stationary
+```
+
+```r
+adf.test(diff(diff(log(Assault_Hollenbeck.ts))))
+```
+
+```
+## Warning in adf.test(diff(diff(log(Assault_Hollenbeck.ts)))): p-value
+## smaller than printed p-value
+```
+
+```
+## 
+## 	Augmented Dickey-Fuller Test
+## 
+## data:  diff(diff(log(Assault_Hollenbeck.ts)))
+## Dickey-Fuller = -4.6724, Lag order = 3, p-value = 0.01
+## alternative hypothesis: stationary
+```
+
+```r
+adf.test(diff(diff(log(Arson_77th.ts))))
+```
+
+```
+## Warning in adf.test(diff(diff(log(Arson_77th.ts)))): p-value smaller than
+## printed p-value
+```
+
+```
+## 
+## 	Augmented Dickey-Fuller Test
+## 
+## data:  diff(diff(log(Arson_77th.ts)))
+## Dickey-Fuller = -5.9285, Lag order = 3, p-value = 0.01
+## alternative hypothesis: stationary
+```
+
+#create standard ARIMA model with no differencing to see what changes are neccesary
+
+
+```r
+library(forecast)  
+```
+
+```
+## Loading required package: timeDate
+```
+
+```
+## This is forecast 7.3
+```
+
+```
+## 
+## Attaching package: 'forecast'
+```
+
+```
+## The following object is masked from 'package:ggfortify':
+## 
+##     gglagplot
+```
+
+```r
+library(stats)
+ 
+fit_1<- arima(Arson_Newton.ts, c(0,0,0))
+fit_2<- arima(Assault_Hollenbeck.ts, c(0,0,0))
+fit_3 <- arima(Arson_77th.ts, c(0,0,0))
+```
+
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-42-1.png)<!-- -->
+
+
+```r
+fit_Arson_Newton<- auto.arima(Arson_Newton.ts)
+fit_Arson_Newton
+```
+
+```
+## Series: Arson_Newton.ts 
+## ARIMA(0,1,0)                    
+## 
+## sigma^2 estimated as 92.53:  log likelihood=-114.16
+## AIC=230.33   AICc=230.47   BIC=231.76
+```
+
+```r
+fit_Arson_Newton <- arima(Arson_Newton.ts, c(0, 1, 0))
+
+fit_Arson_77th <- auto.arima(Arson_77th.ts)
+fit_Arson_77th
+```
+
+```
+## Series: Arson_77th.ts 
+## ARIMA(0,0,0) with non-zero mean 
+## 
+## Coefficients:
+##       intercept
+##         61.2050
+## s.e.     2.0949
+## 
+## sigma^2 estimated as 140.6:  log likelihood=-120.14
+## AIC=244.28   AICc=244.71   BIC=247.14
+```
+
+```r
+fit_Arson_77th <- arima(Arson_77th.ts, c(0, 0, 0))
+
+fit_Assault_Hollenbeck <- auto.arima(Assault_Hollenbeck.ts)
+fit_Assault_Hollenbeck
+```
+
+```
+## Series: Assault_Hollenbeck.ts 
+## ARIMA(1,1,0)                    
+## 
+## Coefficients:
+##           ar1
+##       -0.4086
+## s.e.   0.1743
+## 
+## sigma^2 estimated as 663.3:  log likelihood=-144.28
+## AIC=292.56   AICc=292.99   BIC=295.42
+```
+
+```r
+fit_Arson_77th <- arima(Arson_77th.ts, c(1, 1, 0))
+```
+
+#HoltWinters for Arson/77th
+
+```
+## Warning in HoltWinters(Arson_77th.ts, gamma = TRUE): optimization
+## difficulties: ERROR: ABNORMAL_TERMINATION_IN_LNSRCH
+```
+
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-44-1.png)<!-- -->![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-44-2.png)<!-- -->
+
+#HoltWinters for Assault/Hollenbeck 
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-45-1.png)<!-- -->![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-45-2.png)<!-- -->
+
+#HoltWinters for Arson/Newton 
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-46-1.png)<!-- -->![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-46-2.png)<!-- -->
+
+
+
+# Plot Arson_Newton with ARIMA 
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-47-1.png)<!-- -->![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-47-2.png)<!-- -->
+
+# Plot Arson_77th 
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-48-1.png)<!-- -->![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-48-2.png)<!-- -->
+
+
+# Plot Arson_77th 
+![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-49-1.png)<!-- -->![](Los_Angeles_Crime_Analysis_files/figure-html/unnamed-chunk-49-2.png)<!-- -->

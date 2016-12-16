@@ -881,5 +881,109 @@ plot(Arson_Wilshire.ts.d)
 
 ```
 
+## forecast crime 
+
+```{r}
+require(tseries)
+adf.test(diff(diff(log(Arson_Newton.ts))))
+adf.test(diff(diff(log(Assault_Hollenbeck.ts))))
+adf.test(diff(diff(log(Arson_77th.ts))))
+```
+
+#create standard ARIMA model with no differencing to see what changes are neccesary
+
+```{r}
+library(forecast)  
+library(stats)
+ 
+fit_1<- arima(Arson_Newton.ts, c(0,0,0))
+fit_2<- arima(Assault_Hollenbeck.ts, c(0,0,0))
+fit_3 <- arima(Arson_77th.ts, c(0,0,0))
+
+```
+
+```{r, echo=FALSE, warning=FALSE}
+
+tsdiag(fit_1)
+```
+
+```{r}
 
 
+fit_Arson_Newton<- auto.arima(Arson_Newton.ts)
+fit_Arson_Newton
+fit_Arson_Newton <- arima(Arson_Newton.ts, c(0, 1, 0))
+
+fit_Arson_77th <- auto.arima(Arson_77th.ts)
+fit_Arson_77th
+
+fit_Arson_77th <- arima(Arson_77th.ts, c(0, 0, 0))
+
+fit_Assault_Hollenbeck <- auto.arima(Assault_Hollenbeck.ts)
+fit_Assault_Hollenbeck
+
+fit_Arson_77th <- arima(Arson_77th.ts, c(1, 1, 0))
+
+
+
+```
+
+#HoltWinters for Arson/77th
+```{r, echo = FALSE}
+
+Arson_77th.Holt <- HoltWinters(Arson_77th.ts, gamma=TRUE)
+plot(Arson_77th.Holt)
+
+Arson_77th.forecast <- forecast.HoltWinters(Arson_77th.Holt, h=12)
+plot(Arson_77th.forecast)
+
+```
+
+#HoltWinters for Assault/Hollenbeck 
+```{r, echo = FALSE}
+
+Assault_Hollenbeck.Holt <- HoltWinters(Assault_Hollenbeck.ts, gamma=TRUE)
+plot(Assault_Hollenbeck.Holt)
+
+Assault_Hollenbeck.forecast <- forecast.HoltWinters(Assault_Hollenbeck.Holt, h=12)
+plot(Assault_Hollenbeck.forecast)
+
+```
+
+#HoltWinters for Arson/Newton 
+```{r, echo = FALSE}
+
+Arson_Newton.Holt <- HoltWinters(Arson_Newton.ts, gamma=TRUE)
+plot(Arson_Newton.Holt)
+
+Arson_Newton.forecast <- forecast.HoltWinters(Arson_Newton.Holt, h=12)
+plot(Arson_Newton.forecast)
+
+```
+
+
+
+# Plot Arson_Newton with ARIMA 
+```{r, echo=FALSE}
+tsdiag(fit_Arson_Newton)
+
+forecast.Arson_Newton <- forecast.Arima(fit_Arson_Newton, h=12)
+plot(forecast.Arson_Newton)
+```
+
+# Plot Arson_77th 
+```{r, echo=FALSE}
+tsdiag(fit_Arson_Newton)
+
+forecast.Arson_77th <- forecast.Arima(fit_Arson_77th, h=12)
+plot(forecast.Arson_77th)
+```
+
+
+# Plot Arson_77th 
+```{r, echo=FALSE}
+tsdiag(fit_Arson_Newton)
+
+forecast.Assault_Hollenbeck <- forecast.Arima(fit_Assault_Hollenbeck, h=12)
+plot(forecast.Assault_Hollenbeck )
+```
